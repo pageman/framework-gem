@@ -1,0 +1,3 @@
+module Vesper
+  VERSION = "0.0.1"
+end
