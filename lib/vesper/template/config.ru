@@ -1,8 +1,10 @@
 require 'bundler'
 Bundler.require
 
+Tilt.register Tilt::ERBTemplate, 'html'
+
 get '/?' do
-  "Hello World!"
+  erb :hello_world
 end
 
 run Sinatra::Application
