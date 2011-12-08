@@ -1,8 +1,2 @@
-require 'bundler'
-Bundler.require
-
-Tilt.register Tilt::ERBTemplate, 'html'
-
-Dir["./lib/**/*.rb"].each {|file| require file}
-
+require './app.rb'
 run Sinatra::Application
