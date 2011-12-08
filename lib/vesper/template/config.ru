@@ -3,8 +3,6 @@ Bundler.require
 
 Tilt.register Tilt::ERBTemplate, 'html'
 
-get '/?' do
-  erb :hello_world
-end
+Dir["./lib/**/*.rb"].each {|file| require file}
 
 run Sinatra::Application
