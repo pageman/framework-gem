@@ -1,0 +1,2 @@
+require './app.rb'
+Dir["./tasks/**/*"].each {|file| require file}
