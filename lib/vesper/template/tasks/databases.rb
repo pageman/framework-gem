@@ -1,5 +1,8 @@
 namespace :db do
   
+  desc 'Creates a new seeded database'
+  task :setup => ['db:migrate', 'db:seed']
+  
   desc 'Auto upgrades the database, non-descructive'
   task(:upgrade) { DataMapper.auto_upgrade }
   
