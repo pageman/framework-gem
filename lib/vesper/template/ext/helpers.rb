@@ -1,7 +1,7 @@
 helpers do
   
   def hidden
-    'style="display: none;"'
+    'display: none;'
   end
   
 end
