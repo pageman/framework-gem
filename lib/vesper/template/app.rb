@@ -8,3 +8,7 @@ load_files = [
 ]
 
 load_files.each {|dir| Dir["./#{dir}/**/*.rb"].each {|file| require file}}
+
+DataMapper.finalize
+
+DataMapper.auto_migrate!
