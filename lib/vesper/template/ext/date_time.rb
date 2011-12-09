@@ -1,4 +1,16 @@
 module Timepiece
+  
+  def self.included base
+    base.extend ClassMethods
+  end
+  
+  module ClassMethods
+    
+    def from_fields year, month, day
+      Chronic.parse("#{year}-#{month}-#{day}")
+    end
+    
+  end
 
   def display format = :date
     case format
