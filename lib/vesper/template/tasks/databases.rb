@@ -1,3 +1,8 @@
+desc 'Builds the app from scratch'
+task :build => ['db:setup'] do
+  exec 'rackup'
+end
+
 namespace :db do
   
   desc 'Creates a new seeded database'
