@@ -1,5 +1,6 @@
 source 'http://rubygems.org'
 
+gem 'chronic'
 gem 'redcarpet'
 gem 'sinatra'
 gem 'whenever', :require => false
