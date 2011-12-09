@@ -1,6 +1,9 @@
 require 'bundler'
 Bundler.require
 
-Tilt.register Tilt::ERBTemplate, 'html'
+load_files = [
+  'config',
+  'lib'
+]
 
-Dir["./lib/**/*.rb"].each {|file| require file}
+load_files.each {|dir| Dir["./#{dir}/**/*.rb"].each {|file| require file}}
