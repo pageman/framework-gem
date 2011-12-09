@@ -1,0 +1,16 @@
+@import url(http://fonts.googleapis.com/css?family=Vollkorn:700italic,400italic,400,700);
+@import url(http://fonts.googleapis.com/css?family=Cabin+Condensed:400,700);
+
+body {
+	color: #333;
+	font-family: 'Vollkorn', serif;
+	font-size: 16px;
+	line-height: 1.5em;
+	padding-top: 5%;
+	text-align: center;
+}
+
+h1 {
+	color: black;
+	font-family: 'Cabin Condensed', sans-serif;
+}
