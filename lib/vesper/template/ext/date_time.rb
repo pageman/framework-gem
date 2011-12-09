@@ -54,6 +54,10 @@ module Timepiece
 
 end
 
+Date.class_eval do
+  include Timepiece
+end
+
 DateTime.class_eval do
   include Timepiece
 end
