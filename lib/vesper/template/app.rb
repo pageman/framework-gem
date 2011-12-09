@@ -3,6 +3,7 @@ Bundler.require
 
 load_files = [
   'config',
+  'ext',
   'lib'
 ]
 
