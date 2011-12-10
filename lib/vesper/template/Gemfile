@@ -1,11 +1,26 @@
-source 'http://rubygems.org'
+# Use RubyGems to find and download gems
+  source 'http://rubygems.org'
 
-gem 'chronic'
-gem 'data_mapper'
-# gem 'dm-mysql-adapter'
-gem 'dm-sqlite-adapter'
-gem 'pony'
-gem 'redcarpet'
-gem 'sinatra'
-gem 'twiliolib'
-gem 'whenever', :require => false
+
+# For date and time parsing
+  gem 'chronic'
+
+# For databases and model classes
+  gem 'data_mapper'
+  # gem 'dm-mysql-adapter'
+  gem 'dm-sqlite-adapter'
+
+# For sending email
+  gem 'pony'
+
+# For Markdown conversions
+  gem 'redcarpet'
+
+# For route handling
+  gem 'sinatra'
+
+# For sending text messages
+  gem 'twiliolib'
+
+# For writing cron jobs in Ruby
+  gem 'whenever', :require => false

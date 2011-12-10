@@ -1,8 +1,8 @@
 set :sms_server, {
-  :account_number => '',
-  :account_sid    => '',
-  :account_token  => '',
-  :api_version    => ''
+  account_number: '',
+  account_sid: '',
+  account_token: '',
+  api_version: ''
 }
 
 # To send an sms via Twilio:

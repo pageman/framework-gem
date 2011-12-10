@@ -1,2 +1,5 @@
-require './app.rb'
-Dir["./tasks/**/*"].each {|file| require file}
+# Load the application
+  require './app.rb'
+
+# Load your custom Rake tasks
+  Dir["./tasks/**/*"].each {|file| require file}
