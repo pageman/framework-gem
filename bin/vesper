@@ -5,9 +5,7 @@ require 'fileutils.rb'
 if ARGV[0]
   case ARGV[0]
   when 'create'
-    files = Dir.glob(File.dirname(__FILE__) + '/../lib/vesper/template/*')
-    FileUtils.mkdir ARGV[1] unless Dir.exists? ARGV[1]
-    FileUtils.cp_r files, ARGV[1]
+    FileUtils.cp_r File.dirname(__FILE__) + '/../lib/vesper/template', ARGV[1] unless Dir.exists? ARGV[1]
   end
 else
   # Message about what commands to use goes here
