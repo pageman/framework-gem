@@ -1,20 +1,19 @@
-Vesper is still in alpha, so you'll have to build it from source.
+Vesper is still in development until the 1.0 release, so tread carefully.
 
-[Download the repo](https://github.com/jarrodtaylor/vesper/downloads), uncompress and cd into your new directory.
+## Installation
 
-Install the gem from souce:
+You may need to sudo this:
 
-    sudo rake install
+    gem install vesper
 
-Create a new Vesper web app:
+## Getting Started
 
-    cd ~/Sites
+Create an app:
+
     vesper create MyApp && cd MyApp
 
-Run your new web app:
+Start it up:
 
     rackup
 
-[Visit your web app locally.](http://localhost:9292)
-
-Don't forget to periodically pull updates and reinstall to get the latest version.
+Then take a look at http://localhost:9292.
