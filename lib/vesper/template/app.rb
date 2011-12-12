@@ -5,7 +5,7 @@
 # Directories to load, in order
   load_files = [
     'config',
-    'ext',
+    'bundle/plugins',
     'lib'
   ]
   load_files.each {|dir| Dir["./#{dir}/**/*.rb"].each {|file| require file}}
