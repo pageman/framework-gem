@@ -8,5 +8,8 @@ if ARGV[0]
     FileUtils.cp_r File.dirname(__FILE__) + '/../lib/vesper/template', ARGV[1] unless Dir.exists? ARGV[1]
   end
 else
-  # Message about what commands to use goes here
+  puts ''
+  puts 'To create a Vesper app:'
+  puts '  vesper create <app_name>'
+  puts ''
 end
