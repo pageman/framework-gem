@@ -10,10 +10,6 @@ You may need to sudo this:
 
 Create an app:
 
-    vesper create MyApp && cd MyApp
+    vesper create MyApp
 
-Start it up:
-
-    rackup
-
-Then take a look at http://localhost:9292.
+Follow the on screen instructions, then take a look at http://localhost:9292.
