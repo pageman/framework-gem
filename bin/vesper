@@ -5,7 +5,16 @@ require 'fileutils.rb'
 if ARGV[0]
   case ARGV[0]
   when 'create'
+    puts "Creating #{ARGV[1]}..."
     FileUtils.cp_r File.dirname(__FILE__) + '/../lib/vesper/template', ARGV[1] unless Dir.exists? ARGV[1]
+    puts "Bundling gems..."
+    exec "cd #{ARGV[1]} && bundle >nul 2>nul && echo '\n#{ARGV[1]} is ready. Next steps:\n  cd #{ARGV[1]}\n  rackup\n'"
+  else
+    # This should be temporary until there are more ARGV[0] commands
+    puts ''
+    puts 'To create a Vesper app:'
+    puts '  vesper create <app_name>'
+    puts ''
   end
 else
   puts ''
