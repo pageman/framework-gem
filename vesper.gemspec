@@ -24,7 +24,7 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency "data_mapper", "~> 1.2.0"
   s.add_runtime_dependency "dm-sqlite-adapter", "~> 1.2.0"
   s.add_runtime_dependency "pony", "~> 1.4"
-  s.add_runtime_dependency "redcarpet", "~> 1.17.2"
+  s.add_runtime_dependency "redcarpet", "~> 2.0.0"
   s.add_runtime_dependency "sinatra", "~> 1.3.1"
   s.add_runtime_dependency "twiliolib", "~> 2.0.7"
   s.add_runtime_dependency "whenever", "~> 0.7.0"

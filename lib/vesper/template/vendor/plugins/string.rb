@@ -7,7 +7,7 @@ String.class_eval do
   #  => '<h1>Header</h1>'
   #
   def markdown
-    Redcarpet.new(self).to_html
+    REDCARPET.render self
   end
 
   # Capitalizes the first letter of each word in a string
