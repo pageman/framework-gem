@@ -17,7 +17,15 @@ Gem::Specification.new do |s|
   
   s.post_install_message = "\nTo create a Vesper app:\n  vesper create <app_name>\n\nSend any questions or comments to jarrodtaylor@me.com\n\n"
 
-  # specify any dependencies here; for example:
-  # s.add_development_dependency "rspec"
-  # s.add_runtime_dependency "rest-client"
+  s.add_development_dependency "bundler", "~> 1.0.21"
+
+  s.add_runtime_dependency "bundler", "~> 1.0.21"
+  s.add_runtime_dependency "chronic", "~> 0.6.5"
+  s.add_runtime_dependency "data_mapper", "~> 1.2.0"
+  s.add_runtime_dependency "dm-sqlite-adapter", "~> 1.2.0"
+  s.add_runtime_dependency "pony", "~> 1.4"
+  s.add_runtime_dependency "redcarpet", "~> 1.17.2"
+  s.add_runtime_dependency "sinatra", "~> 1.3.1"
+  s.add_runtime_dependency "twiliolib", "~> 2.0.7"
+  s.add_runtime_dependency "whenever", "~> 0.7.0"
 end
