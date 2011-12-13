@@ -15,7 +15,7 @@ Gem::Specification.new do |s|
   s.executables   = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }
   s.require_paths = ["lib"]
   
-  s.post_install_message = "To create a Vesper app:\n  vesper create <app_name>"
+  s.post_install_message = "\nTo create a Vesper app:\n  vesper create <app_name>\n\nSend any questions or comments to jarrodtaylor@me.com\n\n"
 
   # specify any dependencies here; for example:
   # s.add_development_dependency "rspec"
