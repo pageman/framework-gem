@@ -9,4 +9,4 @@
 	!/log/messages.log
 
 # Ignore development database
-	/data/*sqlite3
+	/data/*.sqlite3
