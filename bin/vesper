@@ -53,6 +53,7 @@ def create_app app_name
 end
 
 
+# This should probably use a template, but we'll get to that later...
 def create_plugin plugin_name
   if Dir.exists? "plugins/#{plugin_name}"
     puts ''
