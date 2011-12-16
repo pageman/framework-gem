@@ -6,8 +6,8 @@
   [
     'config',
     'ext',
-    'vendor/plugins/**/config',
-    'vendor/plugins/**/lib',
+    'plugins/**/config',
+    'plugins/**/lib',
     'lib'
   ].each {|dir| Dir["./#{dir}/**/*.rb"].each {|file| require file}}
 
