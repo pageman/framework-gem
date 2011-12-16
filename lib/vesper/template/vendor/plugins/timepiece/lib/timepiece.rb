@@ -1,36 +1,15 @@
 module Timepiece
   
-  # Adds the below ClassMethods module methods as class methods to the including class
   def self.included base
     base.extend ClassMethods
   end
   
   module ClassMethods
-    
-    # Convert date form fields into a DB compatible date
-    # 
-    # Example:
-    #  >> Date.from_fields 2010, 6, 26
-    #  => 2010-06-26 12:00:00 -0400
-    # 
-    # Arguments:
-    #  year, month, day
-    # 
     def from_fields year, month, day
       Chronic.parse("#{year}-#{month}-#{day}")
     end
-  
   end
   
-  # Convert date to human readable string
-  # 
-  # Example:
-  #  >> DateTime.now.display :date
-  #  => "Friday Dec 09, 2011"
-  # 
-  # Arguments:
-  #  format (options: date, day, day_with_time, american_day)
-  # 
   def display format = :date
     case format
     when :date
@@ -47,15 +26,6 @@ module Timepiece
     self.strftime string
   end
   
-  # Convert date form fields
-  # 
-  # Example:
-  #  >> DateTime.now.to_fields
-  #  => (Entirely to long to show)
-  # 
-  # Arguments:
-  #  field (to reference the fields by name later)
-  # 
   def to_fields field
     date_field = ""
     
@@ -82,7 +52,6 @@ module Timepiece
   
 end
 
-# Include the above module in Date, DateTime and Time classes
-  Date.class_eval     { include Timepiece }
-  DateTime.class_eval { include Timepiece }
-  Time.class_eval     { include Timepiece }
+Date.class_eval     { include Timepiece }
+DateTime.class_eval { include Timepiece }
+Time.class_eval     { include Timepiece }
