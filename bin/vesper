@@ -38,7 +38,8 @@ end
 
 def show_coming_soon_message
   puts ''
-  puts 'That command isn\'t available yet. Vesper is still under development, so try again with the next release.'
+  puts 'That command isn\'t available yet.'
+  puts 'Vesper is still under development, so try again with the next release.'
   puts 'You can follow along with development at: https://github.com/jarrodtaylor/vesper'
   puts ''
 end
