@@ -56,12 +56,14 @@ end
 def create_plugin plugin_name
   # Create plugin
   # Show next steps
+  show_coming_soon_message
 end
 
 
 def remove_plugin plugin_name
   # Delete plugin directory
   # Show message
+  show_coming_soon_message
 end
 
 
@@ -69,6 +71,7 @@ def install_plugin plugin_name
   # Download and install plugin
   # Bundle gems
   # Show next steps
+  show_coming_soon_message
 end
 
 
@@ -84,19 +87,19 @@ else
     if option == 'application' || option == 'app'
       create_app name
     elsif command == 'plugin'
-      show_coming_soon_message
+      create_plugin name
     else
       show_options
     end
   when 'install'
     if option == 'plugin'
-      show_coming_soon_message
+      install_plugin name
     else
       show_options
     end
   when 'remove'
     if option == 'plugin'
-      show_coming_soon_message
+      remove_plugin name
     else
       show_options
     end
