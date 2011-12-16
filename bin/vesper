@@ -82,9 +82,7 @@ else
   case command
   when 'create'
     if option == 'application' || option == 'app'
-      # Create app
-      # Bundle gems
-      # Show next steps
+      create_app name
     elsif command == 'plugin'
       show_coming_soon_message
     else
