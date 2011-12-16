@@ -14,9 +14,6 @@
 # For route handling
   gem 'sinatra', '~> 1.3.1'
 
-# For sending text messages
-  gem 'twiliolib', '~> 2.0.7'
-
 # For writing cron jobs in Ruby
   gem 'whenever', '~> 0.7.0', :require => false
   
