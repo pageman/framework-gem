@@ -61,9 +61,16 @@ end
 
 
 def remove_plugin plugin_name
-  # Delete plugin directory
-  # Show message
-  show_coming_soon_message
+  if Dir.exists? "plugins/#{plugin_name}"
+    FileUtils.rm_rf "plugins/#{plugin_name}"
+    puts ''
+    puts "#{plugin_name} plugin removed."
+    puts ''
+  else
+    puts ''
+    puts 'That plugin isn\'t installed'
+    puts ''
+  end
 end
 
 
