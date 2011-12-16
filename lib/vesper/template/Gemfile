@@ -21,4 +21,4 @@
   gem 'whenever', '~> 0.7.0', :require => false
   
 # Load gems from plugins
-  Dir["./vendor/plugins/**/Gemfile"].each {|gemfile| self.send(:eval, File.open(gemfile, 'r').read)}
+  Dir["./plugins/**/Gemfile"].each {|gemfile| self.send(:eval, File.open(gemfile, 'r').read)}
