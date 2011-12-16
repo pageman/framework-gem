@@ -1,24 +1,107 @@
 #!/usr/bin/env ruby
-
 require 'fileutils.rb'
 
-if ARGV[0] && ARGV[1]
-  case ARGV[0]
-  when 'create'
-    puts "Creating #{ARGV[1]}..."
-    FileUtils.cp_r File.dirname(__FILE__) + '/../lib/vesper/template', ARGV[1] unless Dir.exists? ARGV[1]
-    puts "Bundling gems..."
-    exec "cd #{ARGV[1]} && bundle > /dev/null && echo '\n#{ARGV[1]} is ready. Next steps:\n  cd #{ARGV[1]}\n  rackup\n'"
-  else
-    # This should be temporary until there are more ARGV[0] commands
-    puts ''
-    puts 'To create a Vesper app:'
-    puts '  vesper create <app_name>'
-    puts ''
-  end
+
+unless ARGV[0] && ARGV[1] && ARGV[2]
+  show_options
 else
+  command = ARGV[0]
+  option  = ARGV[1]
+  name    = ARGV[2]
+  
+  case command
+  when 'create'
+    if option == 'application' || option == 'app'
+      # Create app
+      # Bundle gems
+      # Show next steps
+    elsif command == 'plugin'
+      show_coming_soon_message
+    else
+      show_options
+    end
+  when 'install'
+    if option == 'plugin'
+      show_coming_soon_message
+    else
+      show_options
+    end
+  when 'remove'
+    if option == 'plugin'
+      show_coming_soon_message
+    else
+      show_options
+    end
+  else
+    show_options
+  end
+end
+
+
+def show_options
   puts ''
-  puts 'To create a Vesper app:'
-  puts '  vesper create <app_name>'
+  puts 'Commands:'
   puts ''
+  puts '  vesper create application'
+  puts '    Summary: Create a new Vesper web app.'
+  puts '    Example: vesper create application MyApp'
+  puts ''
+  puts '  vesper create app'
+  puts '    Summary: Create a new Vesper web app.'
+  puts '             Alias for vesper create application.'
+  puts '    Example: vesper create app MyApp'
+  puts ''
+  puts '  vesper install plugin'
+  puts '    Summary: Install a plugin from the repo (http://vesperapps.com/plugins).'
+  puts '             Should be run from inside an existing Vesper app.'
+  puts '    Example: vesper install plugin sms'
+  puts ''
+  puts '  vesper remove plugin'
+  puts '    Summary: Removes an existing plugin from a Vesper app.'
+  puts '    Example: vesper remove plugin sms'
+  puts ''
+  puts '  vesper create plugin'
+  puts '    Summary: Creates an empty plugin for development.'
+  puts '             Should be run from inside an existing Vesper app.'
+  puts '    Example: vesper create plugin MyPlugin'
+  puts ''
+  puts 'Documentation can be found online at: http://vesperapps.com/learn'
+  puts ''
+  puts 'Questions and comments should be send to: jarrodtaylor@me.com'
+  puts ''
+end
+
+
+def show_coming_soon_message
+  puts ''
+  puts 'That command isn\'t available yet. Vesper is still under development, so try again with the next release.'
+  puts 'You can follow along with development at: https://github.com/jarrodtaylor/vesper'
+  puts ''
+end
+
+
+def create_app app_name
+  puts "Creating #{app_name}..."
+  FileUtils.cp_r File.dirname(__FILE__) + '/../lib/vesper/framework', app_name unless Dir.exists? app_name
+  puts "Bundling gems..."
+  exec "cd #{app_name} && bundle > /dev/null && echo '\n#{app_name} is ready. Next steps:\n  cd #{app_name}\n  rackup\n'"
+end
+
+
+def create_plugin plugin_name
+  # Create plugin
+  # Show next steps
+end
+
+
+def remove_plugin plugin_name
+  # Delete plugin directory
+  # Show message
+end
+
+
+def install_plugin plugin_name
+  # Download and install plugin
+  # Bundle gems
+  # Show next steps
 end
