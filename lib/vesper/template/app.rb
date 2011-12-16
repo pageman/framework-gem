@@ -3,13 +3,13 @@
   Bundler.require
 
 # Directories to load, in order
-  load_files = [
+  [
     'config',
     'ext',
-    'vendor/plugins',
+    'vendor/plugins/**/config',
+    'vendor/plugins/**/lib',
     'lib'
-  ]
-  load_files.each {|dir| Dir["./#{dir}/**/*.rb"].each {|file| require file}}
+  ].each {|dir| Dir["./#{dir}/**/*.rb"].each {|file| require file}}
 
 # Tell DataMapper that all the models are ready
   DataMapper.finalize

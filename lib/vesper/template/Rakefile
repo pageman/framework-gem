@@ -1,5 +1,8 @@
 # Load the application
   require './app.rb'
 
+# Load plugin Rake tasks
+  Dir["./vendor/plugins/**/tasks/*"].each {|file| require file}
+
 # Load your custom Rake tasks
   Dir["./tasks/**/*"].each {|file| require file}
