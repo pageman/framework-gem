@@ -5,6 +5,7 @@
 # Directories to load, in order
   load_files = [
     'config',
+    'ext',
     'vendor/plugins',
     'lib'
   ]
