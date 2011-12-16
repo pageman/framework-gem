@@ -1,5 +1,5 @@
 # Load the application
-  require './app.rb'
+  require './loader.rb'
 
 # Run the app on Rack
   run Sinatra::Application
