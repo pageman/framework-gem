@@ -1,8 +1,10 @@
-# Markdown Vesper Plugin
+Markdown Vesper Plugin
+======================
+> Converts markdown text into html using Redcarpet.
 
-Converts markdown text into html using Redcarpet.
 
-## Example
+markdown
+--------
 
     >> h = '# This is a header'
 	>> h.markdown
