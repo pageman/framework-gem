@@ -1,5 +1,6 @@
 #!/usr/bin/env ruby
 require 'fileutils.rb'
+require 'grit'
 
 
 def show_options
@@ -18,11 +19,11 @@ def show_options
   puts '  vesper install plugin'
   puts '    Summary: Install a plugin from the repo (http://vesperapps.com/plugins).'
   puts '             Should be run from inside an existing Vesper app.'
-  puts '    Example: vesper install plugin sms'
+  puts '    Example: vesper install plugin git@github.com:jarrodtaylor/vesper-timepiece.git'
   puts ''
   puts '  vesper remove plugin'
   puts '    Summary: Removes an existing plugin from a Vesper app.'
-  puts '    Example: vesper remove plugin sms'
+  puts '    Example: vesper remove plugin timepiece'
   puts ''
   puts '  vesper create plugin'
   puts '    Summary: Creates an empty plugin for development.'
@@ -32,15 +33,6 @@ def show_options
   puts 'Documentation can be found online at: http://vesperapps.com/learn'
   puts ''
   puts 'Questions and comments should be send to: jarrodtaylor@me.com'
-  puts ''
-end
-
-
-def show_coming_soon_message
-  puts ''
-  puts 'That command isn\'t available yet.'
-  puts 'Vesper is still under development, so try again with the next release.'
-  puts 'You can follow along with development at: https://github.com/jarrodtaylor/vesper'
   puts ''
 end
 
@@ -71,7 +63,7 @@ def create_plugin plugin_name
     File.new "plugins/#{plugin_name}/Gemfile", 'w+'
     File.new "plugins/#{plugin_name}/Readme.md", 'w+'
     puts ''
-    puts "#{plugin_name} has been install in /plugins."
+    puts "#{plugin_name} has been installed in /plugins."
     puts 'For more information on Vesper plugin development, visit: http://vesperapps.com/learn'
     puts ''
   end
@@ -92,11 +84,15 @@ def remove_plugin plugin_name
 end
 
 
-def install_plugin plugin_name
-  # Download and install plugin
-  # Bundle gems
-  # Show next steps
-  show_coming_soon_message
+def install_plugin repo
+  puts 'Installing plugin...'
+  new_plugin = Grit::Git.new 'plugins/new_plugin'
+  new_plugin.clone({:branch => 'master'}, repo, new_plugin.git_dir)
+  FileUtils.rm_rf "#{new_plugin.git_dir}/.git"
+  require "./#{new_plugin.git_dir}/meta_data.rb"
+  FileUtils.mv new_plugin.git_dir, "plugins/#{META_DATA[:name]}"
+  puts 'Bundling gems...'
+  exec "bundle > /dev/null && echo '\n#{META_DATA[:name]} is installed in /plugins.\n'"
 end
 
 

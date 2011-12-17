@@ -23,6 +23,7 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency "chronic", "~> 0.6.5"
   s.add_runtime_dependency "data_mapper", "~> 1.2.0"
   s.add_runtime_dependency "dm-sqlite-adapter", "~> 1.2.0"
+  s.add_runtime_dependency "grit", "~> 2.4.1"
   s.add_runtime_dependency "redcarpet", "~> 2.0.0"
   s.add_runtime_dependency "sinatra", "~> 1.3.1"
   s.add_runtime_dependency "whenever", "~> 0.7.0"
