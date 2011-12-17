@@ -6,10 +6,6 @@ You may need to sudo this:
 
     gem install vesper
 
-## Getting Started
+## Options
 
-Create an app:
-
-    vesper create MyApp
-
-Follow the on screen instructions, then take a look at http://localhost:9292.
+    vesper options
