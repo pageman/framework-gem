@@ -1,5 +1,4 @@
-# Load the application
-  require './loader.rb'
+require 'vesper/app'
 
 # Run the app on Rack
-  run Sinatra::Application
+run Sinatra::Application
