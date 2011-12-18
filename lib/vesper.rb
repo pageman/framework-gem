@@ -4,6 +4,8 @@ module Vesper
 
   require 'bundler'
   Bundler.require
+  
+  Tilt.register Tilt::ERBTemplate, 'html'
 
   set :views, './views'
   set :public_folder, './public'
