@@ -30,6 +30,14 @@ def show_options
   puts '             Should be run from inside an existing Vesper app.'
   puts '    Example: vesper create plugin MyPlugin'
   puts ''
+  puts '  vesper run test'
+  puts '    Summary: Runs a test using a file in /tests using MiniTest.'
+  puts '    Example: vesper run test hello_world'
+  puts ''
+  puts '  vesper run tests'
+  puts '    Summary: Runs tests on all the files in /tests using MiniTest'
+  puts '    Example: vesper run tests'
+  puts ''
   puts 'Documentation can be found online at: http://vesperapps.com/learn'
   puts ''
   puts 'Questions and comments should be send to: jarrodtaylor@me.com'
@@ -95,6 +103,24 @@ def install_plugin repo
   exec "bundle > /dev/null && echo '\n#{META_DATA[:name]} is installed in /plugins.\n'"
 end
 
+def run_test file
+  if File.exists? "./tests/#{file}.rb"
+    require 'minitest/autorun'
+    require 'vesper'
+    require "./tests/#{file}.rb"
+  else
+    puts ''
+    puts 'I can\'t find that test. Maybe there\'s a typ0?'
+    puts ''
+  end
+end
+
+def run_tests
+  require 'minitest/autorun'
+  require 'vesper'
+  Dir["./tests/**/*"].each {|file| require file}
+end
+
 
 ARGV[0] && ARGV[1] ? command = "#{ARGV[0]} #{ARGV[1]}" : command = false
 ARGV[2] ? option = ARGV[2] : option = false
@@ -111,6 +137,10 @@ when 'install plugin'
   option ? install_plugin(option) : show_options
 when 'remove plugin'
   option ? remove_plugin(option) : show_options
+when 'run test'
+  option ? run_test(option) : show_options
+when 'run tests'
+  run_tests
 else
   show_options
 end
