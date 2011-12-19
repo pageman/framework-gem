@@ -96,35 +96,21 @@ def install_plugin repo
 end
 
 
-unless ARGV[0] && ARGV[1] && ARGV[2]
-  show_options
+ARGV[0] && ARGV[1] ? command = "#{ARGV[0]} #{ARGV[1]}" : command = false
+ARGV[2] ? option = ARGV[2] : option = false
+
+
+case command
+when 'create application'
+  option ? create_app(option) : show_options
+when 'create app'
+  option ? create_app(option) : show_options
+when 'create plugin'
+  option ? create_plugin(option) : show_options
+when 'install plugin'
+  option ? install_plugin(option) : show_options
+when 'remove plugin'
+  option ? remove_plugin(option) : show_options
 else
-  command = ARGV[0]
-  option  = ARGV[1]
-  name    = ARGV[2]
-  
-  case command
-  when 'create'
-    if option == 'application' || option == 'app'
-      create_app name
-    elsif option == 'plugin'
-      create_plugin name
-    else
-      show_options
-    end
-  when 'install'
-    if option == 'plugin'
-      install_plugin name
-    else
-      show_options
-    end
-  when 'remove'
-    if option == 'plugin'
-      remove_plugin name
-    else
-      show_options
-    end
-  else
-    show_options
-  end
+  show_options
 end
