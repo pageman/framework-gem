@@ -1,12 +1,5 @@
-# Ignore OS X's desktop service files
-	.DS_Store
-
-# These files are specific to each machine and should be ignored
-	/.bundle
-
-# Ignore log files, except for messages
-	/log/*
-	!/log/messages.log
-
-# Ignore development database
-	/data/*.sqlite3
+.DS_Store
+/.bundle
+/log/*
+!/log/messages.log
+/data/development.sqlite3
