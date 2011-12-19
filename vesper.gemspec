@@ -15,6 +15,8 @@ Gem::Specification.new do |s|
   s.executables   = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }
   s.require_paths = ["lib"]
   
+  s.required_ruby_version = ">= 1.9.2"
+  
   s.post_install_message = "\nTo see what vesper can do:\n  vesper options\n\nSend any questions or comments to jarrodtaylor@me.com\n\n"
 
   s.add_development_dependency "bundler", "~> 1.0.21"
