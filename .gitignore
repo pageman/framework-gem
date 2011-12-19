@@ -1,5 +1,5 @@
 *.gem
 .bundle
 Gemfile.lock
-!/lib/vesper/template/Gemfile.lock
+!/lib/vesper/framework/Gemfile.lock
 pkg/*
