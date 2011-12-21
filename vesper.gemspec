@@ -7,7 +7,7 @@ Gem::Specification.new do |s|
   s.version     = Vesper::VERSION
   s.author      = "Jarrod Taylor"
   s.email       = "jarrodtaylor@me.com"
-  s.homepage    = "http://jarrodtaylor.github.com/vesper/"
+  s.homepage    = "http://vesperapps.com/"
   s.summary     = "A web framework with a focus on transparency; Vesper combines Rack, Sinatra and DataMapper."
 
   s.files         = `git ls-files`.split("\n")
