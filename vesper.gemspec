@@ -5,10 +5,10 @@ require "vesper/version"
 Gem::Specification.new do |s|
   s.name        = "vesper"
   s.version     = Vesper::VERSION
-  s.author      = "Jarrod Taylor"
-  s.email       = "jarrodtaylor@me.com"
+  s.authors     = ["Jarrod Taylor", "Richard Rissanen"]
+  s.email       = "jarrod@vesperapps.com"
   s.homepage    = "http://vesperapps.com/"
-  s.summary     = "A web framework with a focus on transparency; Vesper combines Rack, Sinatra and DataMapper."
+  s.summary     = "A web framework with a focus on transparency."
 
   s.files         = `git ls-files`.split("\n")
   s.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
