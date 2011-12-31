@@ -11,12 +11,12 @@ module Vesper
   set :public_folder, './public'
     
   [
+    'plugins/**/hooks/pre-boot.rb',
     'config',
     'plugins/**/config',
     'plugins/**/application',
-    'application'
+    'application',
+    'plugins/**/hooks/post-boot.rb'
   ].each {|dir| Dir["./#{dir}/**/*.rb"].each {|file| require file}}
-
-  DataMapper.finalize
 
 end
