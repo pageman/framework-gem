@@ -44,6 +44,10 @@ end
 def create_app app_name
   puts "Creating #{app_name}..."
   FileUtils.cp_r File.dirname(__FILE__) + '/../lib/vesper/framework', app_name unless Dir.exists? app_name
+  puts 'Installing default plugins...'
+  Dir["#{app_name}/tmp/plugins/**"].each {|plugin| FileUtils.cp_r plugin, "#{app_name}/plugins"}
+  Dir["#{app_name}/plugins/**"].each {|plugin| Dir["#{plugin}/assets/**"].each {|asset| FileUtils.cp_r asset, "#{app_name}/"}}  
+  FileUtils.rm_rf "#{app_name}/tmp/plugins"
   puts "Bundling gems..."
   system "cd #{app_name} && bundle > /dev/null"
   puts ''
