@@ -97,7 +97,7 @@ def install_plugin repo
   require "./#{new_plugin.git_dir}/meta_data.rb"
   FileUtils.mv new_plugin.git_dir, "plugins/#{META_DATA[:name]}"
   puts 'Copying assets...'
-  Dir["plugins/#{META_DATA[:name]}/assets/**/*"].each {|asset| FileUtils.cp_r asset, "./"} 
+  Dir["plugins/#{META_DATA[:name]}/assets/**"].each {|asset| FileUtils.cp_r asset, "./"} 
   puts 'Bundling gems...'
   system "bundle > /dev/null"
   puts ''
