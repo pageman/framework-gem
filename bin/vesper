@@ -96,6 +96,7 @@ def install_plugin repo
   FileUtils.rm_rf "#{new_plugin.git_dir}/.git"
   require "./#{new_plugin.git_dir}/meta_data.rb"
   FileUtils.mv new_plugin.git_dir, "plugins/#{META_DATA[:name]}"
+  FileUtils.cp_r "plugins/#{META_DATA[:name]}/assets", ""
   puts 'Bundling gems...'
   system "bundle > /dev/null"
   puts ''
