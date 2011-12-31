@@ -77,7 +77,14 @@ end
 
 def remove_plugin plugin_name
   if Dir.exists? "plugins/#{plugin_name}"
+    assets = []
+    Dir["plugins/#{plugin_name}/assets/**/*"].each {|asset| assets << asset.gsub("plugins/#{plugin_name}/assets/", "")}
+    template = []
+    Dir[File.dirname(__FILE__) + '/../lib/vesper/framework/**/*'].each {|i| template << i.gsub(/(.)*framework\//, '')}
+    assets.each {|asset| FileUtils.rm_rf asset if !template.include?(asset) && asset.include?('.')}
+    assets.each {|asset| FileUtils.rm_rf asset if !template.include?(asset) && Dir.exists?(asset) && Dir.entries(asset) == [".", ".."]}
     FileUtils.rm_rf "plugins/#{plugin_name}"
+    system "bundle > /dev/null"
     puts ''
     puts "#{plugin_name} plugin removed."
     puts ''
@@ -97,7 +104,7 @@ def install_plugin repo
   require "./#{new_plugin.git_dir}/meta_data.rb"
   FileUtils.mv new_plugin.git_dir, "plugins/#{META_DATA[:name]}"
   puts 'Copying assets...'
-  Dir["plugins/#{META_DATA[:name]}/assets/**"].each {|asset| FileUtils.cp_r asset, "./"} 
+  Dir["plugins/#{META_DATA[:name]}/assets/**"].each {|asset| FileUtils.cp_r asset, "./"}
   puts 'Bundling gems...'
   system "bundle > /dev/null"
   puts ''
