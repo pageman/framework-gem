@@ -7,28 +7,24 @@ def show_options
   puts ''
   puts 'Commands:'
   puts ''
-  puts '  vesper create application'
-  puts '    Summary: Create a new Vesper web app.'
-  puts '    Example: vesper create application MyApp'
-  puts ''
   puts '  vesper create app'
   puts '    Summary: Create a new Vesper web app.'
   puts '             Alias for vesper create application.'
   puts '    Example: vesper create app MyApp'
   puts ''
   puts '  vesper install plugin'
-  puts '    Summary: Install a plugin from the repo (http://vesperapps.com/plugins).'
+  puts '    Summary: Install a plugin from a git repo.'
   puts '             Should be run from inside an existing Vesper app.'
-  puts '    Example: vesper install plugin git@github.com:jarrodtaylor/vesper-timepiece.git'
+  puts '    Example: vesper install plugin git@github.com:vesper/mobile-request-router.git'
   puts ''
   puts '  vesper remove plugin'
   puts '    Summary: Removes an existing plugin from a Vesper app.'
-  puts '    Example: vesper remove plugin timepiece'
+  puts '    Example: vesper remove plugin mobile-request-router'
   puts ''
   puts '  vesper create plugin'
   puts '    Summary: Creates an empty plugin for development.'
   puts '             Should be run from inside an existing Vesper app.'
-  puts '    Example: vesper create plugin MyPlugin'
+  puts '    Example: vesper create plugin my-plugin'
   puts ''
   puts '  vesper run test'
   puts '    Summary: Runs a test using a file in /tests using MiniTest.'
@@ -38,9 +34,9 @@ def show_options
   puts '    Summary: Runs tests on all the files in /tests using MiniTest'
   puts '    Example: vesper run tests'
   puts ''
-  puts 'Documentation can be found online at: http://vesperapps.com/learn'
+  puts 'Documentation can be found online at: http://vesperapps.com'
   puts ''
-  puts 'Questions and comments should be send to: jarrodtaylor@me.com'
+  puts 'Questions and comments should be send to: jarrod@vesperapps.com'
   puts ''
 end
 
@@ -49,7 +45,12 @@ def create_app app_name
   puts "Creating #{app_name}..."
   FileUtils.cp_r File.dirname(__FILE__) + '/../lib/vesper/framework', app_name unless Dir.exists? app_name
   puts "Bundling gems..."
-  exec "cd #{app_name} && bundle > /dev/null && echo '\n#{app_name} is ready. Next steps:\n  cd #{app_name}\n  rackup\n'"
+  system "cd #{app_name} && bundle > /dev/null"
+  puts ''
+  puts "#{app_name} is ready. Next steps:"
+  puts "  cd #{app_name}"
+  puts "  rackup"
+  puts ''
 end
 
 
@@ -95,7 +96,10 @@ def install_plugin repo
   require "./#{new_plugin.git_dir}/meta_data.rb"
   FileUtils.mv new_plugin.git_dir, "plugins/#{META_DATA[:name]}"
   puts 'Bundling gems...'
-  exec "bundle > /dev/null && echo '\n#{META_DATA[:name]} is installed in /plugins.\n'"
+  system "bundle > /dev/null"
+  puts ''
+  puts "#{META_DATA[:name]} is installed in /plugins."
+  puts ''
 end
 
 
