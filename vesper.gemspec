@@ -17,7 +17,7 @@ Gem::Specification.new do |s|
   
   s.required_ruby_version = ">= 1.9.2"
   
-  s.post_install_message = "\nTo see what vesper can do:\n  vesper options\n\nSend any questions or comments to jarrodtaylor@me.com\n\n"
+  s.post_install_message = "\nTo see what vesper can do:\n  vesper options\n\nSend any questions or comments to jarrod@vesperapps.com\n\n"
 
   s.add_runtime_dependency "chronic", "~> 0.6.5"
   s.add_runtime_dependency "data_mapper", "~> 1.2.0"
