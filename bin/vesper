@@ -64,6 +64,7 @@ def create_plugin plugin_name
     puts 'Creating plugin...'    
     FileUtils.cp_r File.dirname(__FILE__) + '/../lib/vesper/plugin', "plugins/#{plugin_name}"
     File.rename "plugins/#{plugin_name}/application/plugin.rb", "plugins/#{plugin_name}/application/#{plugin_name}.rb"
+    File.rename "plugins/#{plugin_name}/assets/plugin.rb", "plugins/#{plugin_name}/assets/#{plugin_name}.rb"
     File.rename "plugins/#{plugin_name}/config/plugin.rb", "plugins/#{plugin_name}/config/#{plugin_name}.rb"
     File.rename "plugins/#{plugin_name}/tasks/plugin.rb", "plugins/#{plugin_name}/tasks/#{plugin_name}.rb"
     puts ''
