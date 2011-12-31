@@ -53,26 +53,20 @@ def create_app app_name
 end
 
 
-# This should probably use a template, but we'll get to that later...
 def create_plugin plugin_name
   if Dir.exists? "plugins/#{plugin_name}"
     puts ''
     puts "#{plugin_name} is already installed in /plugins."
     puts ''
   else
-    puts 'Creating plugin...'
-    FileUtils.mkdir "plugins/#{plugin_name}"
-    FileUtils.mkdir "plugins/#{plugin_name}/application"
-    File.new "plugins/#{plugin_name}/application/#{plugin_name}.rb", 'w+'
-    FileUtils.mkdir "plugins/#{plugin_name}/config"
-    File.new "plugins/#{plugin_name}/config/#{plugin_name}.rb", 'w+'
-    FileUtils.mkdir "plugins/#{plugin_name}/tasks"
-    File.new "plugins/#{plugin_name}/tasks/#{plugin_name}.rb", 'w+'
-    File.new "plugins/#{plugin_name}/Gemfile", 'w+'
-    File.new "plugins/#{plugin_name}/Readme.md", 'w+'
+    puts 'Creating plugin...'    
+    FileUtils.cp_r File.dirname(__FILE__) + '/../lib/vesper/plugin', "plugins/#{plugin_name}"
+    File.rename "plugins/#{plugin_name}/application/plugin.rb", "plugins/#{plugin_name}/application/#{plugin_name}.rb"
+    File.rename "plugins/#{plugin_name}/config/plugin.rb", "plugins/#{plugin_name}/config/#{plugin_name}.rb"
+    File.rename "plugins/#{plugin_name}/tasks/plugin.rb", "plugins/#{plugin_name}/tasks/#{plugin_name}.rb"
     puts ''
     puts "#{plugin_name} has been installed in /plugins."
-    puts 'For more information on Vesper plugin development, visit: http://vesperapps.com/learn'
+    puts 'For more information on Vesper plugin development, visit: http://vesperapps.com'
     puts ''
   end
 end
