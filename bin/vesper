@@ -54,6 +54,7 @@ end
 
 
 def create_plugin plugin_name
+  plugin_name = plugin_name.downcase
   if Dir.exists? "plugins/#{plugin_name}"
     puts ''
     puts "#{plugin_name} is already installed in /plugins."
