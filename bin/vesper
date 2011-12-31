@@ -89,7 +89,7 @@ end
 
 def install_plugin repo
   puts 'Installing plugin...'
-  new_plugin = Grit::Git.new 'plugins/new_plugin'
+  new_plugin = Grit::Git.new 'tmp/new_plugin'
   new_plugin.clone({:branch => 'master'}, repo, new_plugin.git_dir)
   FileUtils.rm_rf "#{new_plugin.git_dir}/.git"
   require "./#{new_plugin.git_dir}/meta_data.rb"
@@ -97,6 +97,7 @@ def install_plugin repo
   puts 'Bundling gems...'
   exec "bundle > /dev/null && echo '\n#{META_DATA[:name]} is installed in /plugins.\n'"
 end
+
 
 def run_test file
   if File.exists? "./tests/#{file}.rb"
@@ -109,6 +110,7 @@ def run_test file
     puts ''
   end
 end
+
 
 def run_tests
   require 'minitest/autorun'
