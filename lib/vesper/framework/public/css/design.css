@@ -1,0 +1,36 @@
+body {
+	font-size: 16px;
+	line-height: 1.5em;
+	font-family: serif;
+	color: #333;
+	-webkit-text-size-adjust:none;
+}
+		
+a img { border: none; }
+		
+a { color: rgb(39, 177, 245); }
+		
+a:hover { text-decoration: none; }
+		
+h1, h2, h3, h4, h5, h6 {
+	font-family: sans-serif;
+	color: black;
+}
+		
+h1 { font-size: 48px; }
+h2 { font-size: 36px; }
+h3 { font-size: 24px; }
+h4 { font-size: 21px; }
+h5 { font-size: 18px; }
+h6 { font-size: 16px; }
+		
+h1 small,
+h2 small,
+h3 small,
+h4 small,
+h5 small,
+h6 small {
+	color: silver;
+	font-weight: normal;
+	font-size: 67%;
+}
