@@ -1,5 +1,5 @@
 META_DATA = {
-  name: 'pony',
+  name: 'pony-emailer',
   version: '1.0.0',
   authors: ['Jarrod Taylor', 'Richard Rissanen'],
   homepage: 'https://github.com/vesper/pony',
