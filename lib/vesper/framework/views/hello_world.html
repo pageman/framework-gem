@@ -1,8 +1,50 @@
 <!-- From /lib/hello_world.rb -->
 
 
-<p><img src="/img/fyeah.jpg" /></p>
+<style type="text/css" media="screen">
+	/* Import fonts from Google */
+	@import url(http://fonts.googleapis.com/css?family=Vollkorn:700italic,400italic,400,700);
+	@import url(http://fonts.googleapis.com/css?family=Cabin+Condensed:400,700);
+	body {
+		color: #333;
+		font-family: 'Vollkorn', serif;
+		font-size: 16px;
+		line-height: 1.5em;
+		text-align: center;
+		padding-bottom: 33px;
+	}
+	fieldset {
+		border: 1px solid silver;
+		display: inline-block;
+		margin: auto;
+		-webkit-border-radius: 7px;
+	}
+	legend { font-family: 'Cabin Condensed', sans-serif; }
+	fieldset p {
+		margin: 11px;
+	}
+	code {
+		padding: 0 11px;
+		font-size: 11px;
+		display: block;
+		background-color: black;
+		color: white;
+		-webkit-border-radius: 2px;
+	}
+</style>
 
-<h1>Hello World!</h1>
 
-<p>Your site appears to be running.</p>
+<p><img src="/img/vesper.png" /></p>
+
+<fieldset>
+	<legend>Getting Started</legend>
+	
+	<p>Install a plugin from a git repo:<code>vesper install plugin git@github.com:vesper/mobile-request-router.git</code></p>
+	<p>Remove a plugin:<code>vesper remove plugin mobile-request-router</code></p>
+	<p>Run your tests:<code>vesper run tests</code></p>
+	<p>More commands:<code>vesper options</code></p>
+	
+</fieldset>
+
+<p>Documentation can be found online at: <a href="http://vesperapps.com">http://vesperapps.com</a></p>
+<p>Questions, comments and bugs should be send to: <a href="mailto:jarrod@vesperapps.com">jarrod@vesperapps.com</a></p>
