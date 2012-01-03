@@ -8,7 +8,7 @@ Gem::Specification.new do |s|
   s.authors     = ["Jarrod Taylor", "Richard Rissanen"]
   s.email       = "jarrod@vesperapps.com"
   s.homepage    = "http://vesperapps.com/"
-  s.summary     = "A web framework with a focus on transparency."
+  s.summary     = "Vesper is the Ruby web framework designed for clarity, flexibility and effectiveness."
 
   s.files         = `git ls-files`.split("\n")
   s.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
