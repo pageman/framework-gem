@@ -9,15 +9,17 @@ module Vesper
 
   set :views, './views'
   set :public_folder, './public'
+  
+  Dir["./plugins/**/pre-boot.rb"].each {|file| require file}
     
   [
-    'plugins/**/hooks/pre-boot.rb',
     'config',
     'plugins/**/config',
     'plugins/**/application',
-    'application',
-    'plugins/**/hooks/post-boot.rb'
+    'application'
   ].each {|dir| Dir["./#{dir}/**/*.rb"].each {|file| require file}}
+  
+  Dir["./plugins/**/post-boot.rb"].each {|file| require file}
     
   error(400) { redirect '/400.html' }
   error(401) { redirect '/401.html' }
