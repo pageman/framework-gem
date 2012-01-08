@@ -1,4 +1,6 @@
-Vesper 1.0.0
+![Vesper Logo](http://vesperapps.com/img/vesper.png)
+
+Version 1.0.0
 ======
 > The Ruby web framework designed for clarity, flexibility and effectiveness.
 
