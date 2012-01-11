@@ -8,7 +8,7 @@ Gem::Specification.new do |s|
   s.authors     = ["Jarrod Taylor", "Richard Rissanen"]
   s.email       = "jarrod@vesperapps.com"
   s.homepage    = "http://vesperapps.com/"
-  s.summary     = "Vesper is the Ruby web framework designed for clarity, flexibility and effectiveness."
+  s.summary     = "Vesper is the Ruby web app framework designed for clarity, flexibility and effectiveness."
 
   s.files         = `git ls-files`.split("\n")
   s.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
@@ -18,7 +18,8 @@ Gem::Specification.new do |s|
   s.required_ruby_version = ">= 1.9.2"
   
   s.post_install_message = "\nTo see what vesper can do:\n  vesper options\n\nSend any questions or comments to jarrod@vesperapps.com\n\n"
-
+  
+  s.add_runtime_dependency "bundler", "~> 1.0.21"
   s.add_runtime_dependency "grit", "~> 2.4.1"
   s.add_runtime_dependency "sinatra", "~> 1.3.1"
 end
