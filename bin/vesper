@@ -1,107 +1,70 @@
 #!/usr/bin/env ruby
-require 'fileutils.rb'
-require 'grit'
 
 
-def show_options
-  puts ''
-  puts 'Commands:'
-  puts ''
-  puts '  vesper create app'
-  puts '    Summary: Creates a new Vesper web app.'
-  puts '             Alias for vesper create application.'
-  puts '    Example: vesper create app HelloWorld'
-  puts ''
-  puts '  vesper install plugin'
-  puts '    Summary: Installs a plugin from a git repo.'
-  puts '             Should be run from inside an existing Vesper app.'
-  puts '    Example: vesper install plugin git@github.com:vesper/logger.git'
-  puts ''
-  puts '  vesper remove plugin'
-  puts '    Summary: Removes an existing plugin from a Vesper app.'
-  puts '    Example: vesper remove plugin logger'
-  puts ''
-  puts '  vesper create plugin'
-  puts '    Summary: Creates an empty plugin for development.'
-  puts '             Should be run from inside an existing Vesper app.'
-  puts '    Example: vesper create plugin my-plugin'
-  puts ''
-  puts 'Documentation can be found online at: http://vesperapps.com'
-  puts ''
-  puts 'Questions and comments should be send to: jarrod@vesperapps.com'
-  puts ''
-end
+ARGV[0] && ARGV[1] ? msg = "#{ARGV[0]} #{ARGV[1]}" : msg = false
+ARGV[2] ? rec = ARGV[2] : rec = false
+ARGV[3] ? opt = ARGV[3] : opt = false
 
 
-def create_app app_name
-  if Dir.exists? app_name
+if rec && (msg == 'create application' || msg == 'create app')
+  require 'fileutils.rb'
+  
+  if Dir.exists? rec
     puts 'That name is already taken.'
   else
-    puts "Creating #{app_name}..."
-    FileUtils.cp_r File.dirname(__FILE__) + '/../lib/vesper/framework', app_name
-    FileUtils.chmod_R 0777, app_name
+    puts "Creating #{rec}..."
+    FileUtils.cp_r File.dirname(__FILE__) + '/../lib/vesper/framework', rec
+    FileUtils.chmod_R 0777, rec
     puts 'Installing default plugins...'
-    Dir["#{app_name}/tmp/plugins/**"].each {|plugin| FileUtils.cp_r plugin, "#{app_name}/plugins"}
-    Dir["#{app_name}/plugins/**"].each {|plugin| Dir["#{plugin}/assets/**"].each {|asset| FileUtils.cp_r asset, "#{app_name}/"}}  
-    FileUtils.rm_rf "#{app_name}/tmp/plugins"
+    Dir["#{rec}/tmp/plugins/**"].each {|plugin| FileUtils.cp_r plugin, "#{rec}/plugins"}
+    Dir["#{rec}/plugins/**"].each {|plugin| Dir["#{plugin}/assets/**"].each {|asset| FileUtils.cp_r asset, "#{rec}/"}}  
+    FileUtils.rm_rf "#{rec}/tmp/plugins"
     puts "Bundling gems..."
-    system "cd #{app_name} && bundle > /dev/null"
+    system "cd #{rec} && bundle > /dev/null"
     puts ''
-    puts "#{app_name} is ready. Next steps:"
-    puts "  cd #{app_name}"
+    puts "#{rec} is ready. Next steps:"
+    puts "  cd #{rec}"
     puts "  rackup"
     puts ''
   end
+  
+  exit
 end
 
 
-def create_plugin plugin_name
-  plugin_name = plugin_name.downcase
-  if Dir.exists? "plugins/#{plugin_name}"
+if rec && msg == 'create plugin'
+  require 'fileutils.rb'
+  
+  rec = rec.downcase
+  if Dir.exists? "plugins/#{rec}"
     puts ''
-    puts "#{plugin_name} is already installed in /plugins."
+    puts "#{rec} is already installed in /plugins."
     puts ''
   else
     puts 'Creating plugin...'    
-    FileUtils.cp_r File.dirname(__FILE__) + '/../lib/vesper/plugin', "plugins/#{plugin_name}"
-    FileUtils.chmod_R 0777, "plugins/#{plugin_name}"
-    File.rename "plugins/#{plugin_name}/application/plugin.rb", "plugins/#{plugin_name}/application/#{plugin_name}.rb"
-    File.rename "plugins/#{plugin_name}/assets/plugin.rb", "plugins/#{plugin_name}/assets/#{plugin_name}.rb"
-    File.rename "plugins/#{plugin_name}/config/plugin.rb", "plugins/#{plugin_name}/config/#{plugin_name}.rb"
-    File.rename "plugins/#{plugin_name}/tasks/plugin.rb", "plugins/#{plugin_name}/tasks/#{plugin_name}.rb"
+    FileUtils.cp_r File.dirname(__FILE__) + '/../lib/vesper/plugin', "plugins/#{rec}"
+    FileUtils.chmod_R 0777, "plugins/#{rec}"
+    File.rename "plugins/#{rec}/application/plugin.rb", "plugins/#{rec}/application/#{rec}.rb"
+    File.rename "plugins/#{rec}/assets/plugin.rb", "plugins/#{rec}/assets/#{rec}.rb"
+    File.rename "plugins/#{rec}/config/plugin.rb", "plugins/#{rec}/config/#{rec}.rb"
+    File.rename "plugins/#{rec}/tasks/plugin.rb", "plugins/#{rec}/tasks/#{rec}.rb"
     puts ''
-    puts "#{plugin_name} has been installed in /plugins."
+    puts "#{rec} has been created in /plugins."
     puts 'For more information on Vesper plugin development, visit: http://vesperapps.com'
     puts ''
   end
+
+  exit
 end
 
 
-def remove_plugin plugin_name
-  if Dir.exists? "plugins/#{plugin_name}"
-    assets = []
-    Dir["plugins/#{plugin_name}/assets/**/*"].each {|asset| assets << asset.gsub("plugins/#{plugin_name}/assets/", "")}
-    template = []
-    Dir[File.dirname(__FILE__) + '/../lib/vesper/framework/**/*'].each {|i| template << i.gsub(/(.)*framework\//, '')}
-    assets.each {|asset| FileUtils.rm_rf asset if !template.include?(asset) && asset.include?('.')}
-    assets.each {|asset| FileUtils.rm_rf asset if !template.include?(asset) && Dir.exists?(asset) && Dir.entries(asset) == [".", ".."]}
-    FileUtils.rm_rf "plugins/#{plugin_name}"
-    system "bundle > /dev/null"
-    puts ''
-    puts "#{plugin_name} plugin removed."
-    puts ''
-  else
-    puts ''
-    puts 'That plugin isn\'t installed'
-    puts ''
-  end
-end
-
-
-def install_plugin repo
+if rec && msg == 'install plugin'
+  require 'fileutils.rb'
+  require 'grit'
+  
   puts 'Installing plugin...'
   new_plugin = Grit::Git.new 'tmp/new_plugin'
-  new_plugin.clone({:branch => 'master'}, repo, new_plugin.git_dir)
+  new_plugin.clone({:branch => 'master'}, rec, new_plugin.git_dir)
   FileUtils.rm_rf "#{new_plugin.git_dir}/.git"
   require "./#{new_plugin.git_dir}/meta_data.rb"
   FileUtils.mv new_plugin.git_dir, "plugins/#{META_DATA[:name]}"
@@ -113,24 +76,59 @@ def install_plugin repo
   puts ''
   puts "#{META_DATA[:name]} is installed in /plugins."
   puts ''
+
+  exit
 end
 
 
-ARGV[0] && ARGV[1] ? command = "#{ARGV[0]} #{ARGV[1]}" : command = false
-ARGV[2] ? option = ARGV[2] : option = false
-
-
-case command
-when 'create application'
-  option ? create_app(option) : show_options
-when 'create app'
-  option ? create_app(option) : show_options
-when 'create plugin'
-  option ? create_plugin(option) : show_options
-when 'install plugin'
-  option ? install_plugin(option) : show_options
-when 'remove plugin'
-  option ? remove_plugin(option) : show_options
-else
-  show_options
+if rec && msg == 'remove plugin'
+  require 'fileutils.rb'
+  
+  if Dir.exists? "plugins/#{rec}"
+    assets = []
+    Dir["plugins/#{rec}/assets/**/*"].each {|asset| assets << asset.gsub("plugins/#{rec}/assets/", "")}
+    template = []
+    Dir[File.dirname(__FILE__) + '/../lib/vesper/framework/**/*'].each {|i| template << i.gsub(/(.)*framework\//, '')}
+    assets.each {|asset| FileUtils.rm_rf asset if !template.include?(asset) && asset.include?('.')}
+    assets.each {|asset| FileUtils.rm_rf asset if !template.include?(asset) && Dir.exists?(asset) && Dir.entries(asset) == [".", ".."]}
+    FileUtils.rm_rf "plugins/#{rec}"
+    system "bundle > /dev/null"
+    puts ''
+    puts "#{rec} plugin removed."
+    puts ''
+  else
+    puts ''
+    puts 'That plugin isn\'t installed'
+    puts ''
+  end
+  
+  exit
 end
+
+
+puts ''
+puts 'Messages:'
+puts ''
+puts '  vesper create app'
+puts '    Summary: Creates a new Vesper web app.'
+puts '             Alias for vesper create application.'
+puts '    Example: vesper create app HelloWorld'
+puts ''
+puts '  vesper install plugin'
+puts '    Summary: Installs a plugin from a git repo.'
+puts '             Should be run from inside an existing Vesper app.'
+puts '    Example: vesper install plugin git@github.com:jarrodtaylor/vpi-mobile-request-router.git'
+puts ''
+puts '  vesper remove plugin'
+puts '    Summary: Removes an existing plugin from a Vesper app.'
+puts '    Example: vesper remove plugin mobile-request-router'
+puts ''
+puts '  vesper create plugin'
+puts '    Summary: Creates an empty plugin for development.'
+puts '             Should be run from inside an existing Vesper app.'
+puts '    Example: vesper create plugin my-plugin'
+puts ''
+puts 'Documentation can be found online at: http://vesperapps.com'
+puts ''
+puts 'Questions and comments should be send to: jarrod@vesperapps.com'
+puts ''
