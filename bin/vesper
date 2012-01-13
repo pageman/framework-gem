@@ -15,9 +15,11 @@ if rec && (msg == 'create application' || msg == 'create app')
     puts "Creating #{rec}..."
     FileUtils.cp_r File.dirname(__FILE__) + '/../lib/vesper/framework', rec
     FileUtils.chmod_R 0777, rec
-    puts 'Installing default plugins...'
-    Dir["#{rec}/tmp/plugins/**"].each {|plugin| FileUtils.cp_r plugin, "#{rec}/plugins"}
-    Dir["#{rec}/plugins/**"].each {|plugin| Dir["#{plugin}/assets/**"].each {|asset| FileUtils.cp_r asset, "#{rec}/"}}  
+    unless opt == '-core'
+      puts 'Installing default plugins...'
+      Dir["#{rec}/tmp/plugins/**"].each {|plugin| FileUtils.cp_r plugin, "#{rec}/plugins"}
+      Dir["#{rec}/plugins/**"].each {|plugin| Dir["#{plugin}/assets/**"].each {|asset| FileUtils.cp_r asset, "#{rec}/"}}  
+    end
     FileUtils.rm_rf "#{rec}/tmp/plugins"
     puts "Bundling gems..."
     system "cd #{rec} && bundle > /dev/null"
