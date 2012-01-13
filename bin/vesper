@@ -80,7 +80,6 @@ end
 
 if rec && msg == 'install plugin'
   require 'fileutils.rb'
-  require 'grit'
   
   plugin = rec.gsub(/(.)*\//, '').gsub(/.git/, '')
   
