@@ -82,23 +82,25 @@ if rec && msg == 'install plugin'
   require 'fileutils.rb'
   require 'grit'
   
+  plugin = rec.gsub(/(.)*\//, '').gsub(/.git/, '')
+  
   puts 'Installing plugin...'
-  new_plugin = Grit::Git.new 'tmp/new_plugin'
-  new_plugin.clone({:branch => 'master'}, rec, new_plugin.git_dir)
-  FileUtils.rm_rf "#{new_plugin.git_dir}/.git"
-  require "./#{new_plugin.git_dir}/meta_data.rb"
-  FileUtils.mv new_plugin.git_dir, "plugins/#{META_DATA[:name]}"
-  FileUtils.chmod_R 0777, "plugins/#{META_DATA[:name]}"
+  system "cd plugins && git clone #{rec}"
+  FileUtils.rm_rf "plugins/#{plugin}/.git"
+  FileUtils.chmod_R 0777, "plugins/#{plugin}"
+
   puts 'Copying assets...'
-  Dir["plugins/#{META_DATA[:name]}/assets/**"].each {|asset| FileUtils.cp_r asset, "./"}
+  Dir["plugins/#{plugin}/assets/**"].each {|asset| FileUtils.cp_r asset, "./"}
+  
   unless opt == '-no-bundle'
     puts 'Bundling gems...'
     system "bundle > /dev/null"
   end
+  
   puts ''
-  puts "#{META_DATA[:name]} is installed in /plugins."
+  puts "#{plugin} is installed in /plugins."
   puts ''
-
+  
   exit
 end
 
