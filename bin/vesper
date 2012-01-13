@@ -15,11 +15,29 @@ if rec && (msg == 'create application' || msg == 'create app')
     puts "Creating #{rec}..."
     FileUtils.cp_r File.dirname(__FILE__) + '/../lib/vesper/framework', rec
     FileUtils.chmod_R 0777, rec
-    unless opt == '-core'
+
+    unless opt == '-core' || opt == '-recipe'
       puts 'Installing default plugins...'
       Dir["#{rec}/tmp/plugins/**"].each {|plugin| FileUtils.cp_r plugin, "#{rec}/plugins"}
       Dir["#{rec}/plugins/**"].each {|plugin| Dir["#{plugin}/assets/**"].each {|asset| FileUtils.cp_r asset, "#{rec}/"}}  
     end
+
+    if opt == '-recipe'
+      errors = false
+      errors = true if ARGV[4].nil?
+      errors = true unless File.exists?(ENV['HOME'] + '/.vesper.rb')
+      require ENV['HOME'] + '/.vesper' unless errors
+      errors = true unless @recipes && @recipes[ARGV[4].to_sym]
+      
+      if errors
+        puts ''
+        puts 'I can\'t seem to find that recipe.'
+        puts ''
+      else
+        @recipes[ARGV[4].to_sym].each {|p| system "cd #{rec} && vesper install plugin #{p} -no-bundle"}
+      end
+    end
+
     FileUtils.rm_rf "#{rec}/tmp/plugins"
     puts "Bundling gems..."
     system "cd #{rec} && bundle > /dev/null"
@@ -73,8 +91,10 @@ if rec && msg == 'install plugin'
   FileUtils.chmod_R 0777, "plugins/#{META_DATA[:name]}"
   puts 'Copying assets...'
   Dir["plugins/#{META_DATA[:name]}/assets/**"].each {|asset| FileUtils.cp_r asset, "./"}
-  puts 'Bundling gems...'
-  system "bundle > /dev/null"
+  unless opt == '-no-bundle'
+    puts 'Bundling gems...'
+    system "bundle > /dev/null"
+  end
   puts ''
   puts "#{META_DATA[:name]} is installed in /plugins."
   puts ''
