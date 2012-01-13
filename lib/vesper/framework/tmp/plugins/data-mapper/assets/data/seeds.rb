@@ -4,4 +4,4 @@
 #  >> rake dm:seed
 # 
 # Example:
-# User.create(:email => 'jarrod@vesperapps.com')
+# User.create email: 'jarrod@vesperapps.com'

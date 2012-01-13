@@ -4,4 +4,4 @@
 #  >> rake dm:transmogrify
 # 
 # Example:
-# User.first.update(:email => 'new.email@example.com')
+# User.first.update email: 'new.email@example.com'
