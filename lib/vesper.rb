@@ -5,6 +5,10 @@ module Vesper
   def self.load_app
     require 'bundler'
     Bundler.require
+
+    set :environment, ENV['env']         if ENV['env']
+    set :environment, ENV['environment'] if ENV['environment']
+    set :environment, ENV['rack_env']    if ENV['rack_env']
   
     Tilt.register Tilt::ERBTemplate, 'html'
 
