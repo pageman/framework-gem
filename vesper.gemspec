@@ -17,7 +17,7 @@ Gem::Specification.new do |s|
   
   s.required_ruby_version = ">= 1.9.3"
   
-  s.post_install_message = "\nTo see what vesper can do:\n  vesper options\n\nSend any questions or comments to jarrod@vesperapps.com\n\n"
+  s.post_install_message = "\nTo see what vesper can do:\n  vesper messages\n\nSend any questions or comments to jarrod@vesperapps.com\n\n"
   
   s.add_runtime_dependency "bundler", "~> 1.0.21"
   s.add_runtime_dependency "sinatra", "~> 1.3.2"
