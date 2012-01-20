@@ -15,7 +15,7 @@ Gem::Specification.new do |s|
   s.executables   = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }
   s.require_paths = ["lib"]
   
-  s.required_ruby_version = ">= 1.9.3"
+  s.required_ruby_version = ">= 1.9.2"
   
   s.post_install_message = "\nTo see what vesper can do:\n  vesper messages\n\nSend any questions or comments to jarrod@vesperapps.com\n\n"
   
