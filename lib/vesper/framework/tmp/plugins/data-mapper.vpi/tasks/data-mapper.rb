@@ -16,7 +16,7 @@
   # Example:
   #  >> rake dm:upgrade
     desc 'Auto upgrades the database, non-descructive'
-    task(:upgrade) { DataMapper.auto_upgrade }
+    task(:upgrade) { DataMapper.auto_upgrade! }
   
   # Example:
   #  >> rake dm:migrate
