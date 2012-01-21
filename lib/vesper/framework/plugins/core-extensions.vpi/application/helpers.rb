@@ -1,7 +1,10 @@
 helpers do
   
   def active path
-    'active' if request.path_info.include? "/#{path}"
+    path = Array[path] unless path.kind_of? Array
+    match = false
+    path.each {|p| match = true if request.path_info.include? p }
+    'active' if match
   end
   
   def alert

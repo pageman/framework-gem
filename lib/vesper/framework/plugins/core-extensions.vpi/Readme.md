@@ -7,6 +7,8 @@ active(path)
 ------------
 > Adds a class of 'active' to an element that matches the page url.
 
+> Accepts a string or an array.
+
 	>> <a href="#" class="<%= active '/home' %>">Home</a>
 	=> <a href="#" class="active">Home</a>
 
