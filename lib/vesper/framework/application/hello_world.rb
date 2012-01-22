@@ -1,6 +1,8 @@
 # Sinatra route
 # For more info: http://www.sinatrarb.com/
 # 
-get '/?' do
-  erb :hello_world
+
+# Renders /views/hello.html
+get '/hello-world/?' do
+  erb :hello
 end

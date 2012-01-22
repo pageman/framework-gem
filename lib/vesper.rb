@@ -26,6 +26,10 @@ module Vesper
   
     Dir["./plugins/**/post-boot.rb"].each {|file| require file}
     
+    configure :development do
+      get('/?') { erb :'../public/index', layout: false }
+    end
+    
     configure :production do
       error(400) { redirect '/errors/400.html' }
       error(401) { redirect '/errors/401.html' }
