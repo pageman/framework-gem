@@ -13,7 +13,7 @@ Installation
 
 Vesper includes almost everything required to write a web app, but first you have to set up your dev environment. Here's what you'll need to get started:
 			
-Ruby 1.9.3 or above: [http://www.ruby-lang.org/](http://www.ruby-lang.org/)</a>
+Ruby 1.9.2 or above: [http://www.ruby-lang.org/](http://www.ruby-lang.org/)</a>
 			
 > **Pro Tip:** Using [rbenv](https://github.com/sstephenson/rbenv) and [ruby-build](https://github.com/sstephenson/ruby-build) should make this simpler.
 			
