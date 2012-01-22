@@ -1,8 +1,8 @@
 body {
+	color: #333;
+	font-family: serif;
 	font-size: 16px;
 	line-height: 1.5em;
-	font-family: serif;
-	color: #333;
 	-webkit-text-size-adjust:none;
 }
 		
@@ -13,8 +13,8 @@ a { color: rgb(39, 177, 245); }
 a:hover { text-decoration: none; }
 		
 h1, h2, h3, h4, h5, h6 {
-	font-family: sans-serif;
 	color: black;
+	font-family: sans-serif;
 }
 		
 h1 { font-size: 48px; }
@@ -31,6 +31,6 @@ h4 small,
 h5 small,
 h6 small {
 	color: silver;
-	font-weight: normal;
 	font-size: 67%;
+	font-weight: normal;
 }
