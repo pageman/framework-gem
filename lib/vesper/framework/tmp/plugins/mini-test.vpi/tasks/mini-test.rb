@@ -5,7 +5,7 @@ task :minitest do
   unless ENV['file']
     Dir["./tests/**/*.rb"].each {|file| require file}
   else
-    if File.exists? "./tests/#{ENV['file']}.rb"
+    if File.exist? "./tests/#{ENV['file']}.rb"
       require "./tests/#{ENV['file']}.rb"
     else
       puts ''
