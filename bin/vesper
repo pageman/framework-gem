@@ -25,7 +25,7 @@ if rec && (msg == 'create application' || msg == 'create app')
     if opt == '-recipe'
       errors = false
       errors = true if ARGV[4].nil?
-      errors = true unless File.exists?(ENV['HOME'] + '/.vesper.rb')
+      errors = true unless File.exist?(ENV['HOME'] + '/.vesper.rb')
       require ENV['HOME'] + '/.vesper' unless errors
       errors = true unless @recipes && @recipes[ARGV[4].to_sym]
       
@@ -107,13 +107,13 @@ end
 if rec && msg == 'remove plugin'
   require 'fileutils.rb'
   
-  if Dir.exists? "plugins/#{rec}"
+  if Dir.exist? "plugins/#{rec}"
     assets = []
     Dir["plugins/#{rec}/assets/**/*"].each {|asset| assets << asset.gsub("plugins/#{rec}/assets/", "")}
     template = []
     Dir[File.dirname(__FILE__) + '/../lib/vesper/framework/**/*'].each {|i| template << i.gsub(/(.)*framework\//, '')}
     assets.each {|asset| FileUtils.rm_rf asset if !template.include?(asset) && asset.include?('.')}
-    assets.each {|asset| FileUtils.rm_rf asset if !template.include?(asset) && Dir.exists?(asset) && Dir.entries(asset) == [".", ".."]}
+    assets.each {|asset| FileUtils.rm_rf asset if !template.include?(asset) && Dir.exist?(asset) && Dir.entries(asset) == [".", ".."]}
     FileUtils.rm_rf "plugins/#{rec}"
     system "bundle > /dev/null"
     puts ''
