@@ -9,7 +9,7 @@ ARGV[3] ? opt = ARGV[3] : opt = false
 if rec && (msg == 'create application' || msg == 'create app')
   require 'fileutils.rb'
   
-  if Dir.exists? rec
+  if Dir.exist? rec
     puts 'That name is already taken.'
   else
     puts "Creating #{rec}..."
@@ -56,7 +56,7 @@ if rec && msg == 'create plugin'
   require 'fileutils.rb'
   
   rec = rec.downcase
-  if Dir.exists? "plugins/#{rec}"
+  if Dir.exist? "plugins/#{rec}"
     puts ''
     puts "#{rec} is already installed in /plugins."
     puts ''
